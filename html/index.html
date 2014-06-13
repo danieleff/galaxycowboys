@@ -1,10 +1,39 @@
 <html>
     <head>
         <script language="javascript" type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script language="javascript" type="text/javascript" src="galaxycowboys.js"></script>
+        
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>    
+        
+        <script language="javascript" type="text/javascript" src="gc_net.js"></script>
+        <script language="javascript" type="text/javascript" src="gc_ui.js"></script>
+        
+        <script>
+            $(function() {
+                $( "#tabs" ).tabs().tabs( "option", "active", 1);
+            });
+            gc_net.add_server("http://localhost:8080");
+            gc_net.start();
+            /*gc_net._send_random_server("get_static_data", {a:6, b:"test"}, function(response) {
+                alert(JSON.stringify(response));
+            });*/
+            
+        </script>
+        
     </head>
     
     <body>
-        Test
+        <div id="tabs">
+        <ul>
+            <li><a href="#tab-connection">Overview</a></li>
+            <li><a href="#tab-galaxy">Galaxy</a></li>
+        </ul>
+        <div id="tab-connection">
+            Overview
+        </div>
+        <div id="tab-galaxy">
+            Galaxy
+        </div>
+        </div>
     </body>
 </html>
