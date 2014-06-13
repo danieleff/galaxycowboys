@@ -1,7 +1,5 @@
 package galaxycowboys.gameobject;
 
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 
 public abstract class GameObject {
@@ -15,6 +13,10 @@ public abstract class GameObject {
     protected GameObject(Player owner, GameObject parent) {
         this.owner=owner;
         if (parent!=null) attachToParent(parent);
+    }
+    
+    public List<GameObject> getChilds() {
+        return childs;
     }
         
     public String getStringAttribute(String key, String def) {
@@ -57,7 +59,7 @@ public abstract class GameObject {
     private boolean detach(GameObject gameObject) {
         return childs.remove(gameObject);
     }
-    
+    /*
     protected abstract void serializeThis(OutputStream out);
     
     protected abstract void deserializeThis(InputStream in);
@@ -82,6 +84,6 @@ public abstract class GameObject {
         for(int i=0;i<childCount;i++) {
             //get child type, create child, deserialize child
         }
-    }
+    }*/
 
 }

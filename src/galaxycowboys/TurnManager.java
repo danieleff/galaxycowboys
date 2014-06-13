@@ -7,9 +7,15 @@ import galaxycowboys.gameobject.Turn;
 import java.util.List;
 
 public class TurnManager {
+    
+    private final Turn previousTurn;
+
+    public TurnManager(Turn previousTurn) {
+        this.previousTurn = previousTurn;
+    }
 
     public Turn getPrevious() {
-        return null;
+        return previousTurn;
     }
     
     public Turn doTurn() {

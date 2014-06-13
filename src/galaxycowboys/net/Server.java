@@ -1,16 +1,22 @@
 package galaxycowboys.net;
 
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import com.google.gson.Gson;
 
 import fi.iki.elonen.NanoHTTPD;
+import galaxycowboys.TurnManager;
+import galaxycowboys.gameobject.Galaxy;
+import galaxycowboys.gameobject.GameObject;
+import galaxycowboys.gameobject.Star;
+import galaxycowboys.gameobject.Turn;
 
 public class Server extends NanoHTTPD {
-    public Server(int port) {
+    private final TurnManager turnManager;
+
+    public Server(int port, TurnManager turnManager) {
         super(port);
+        this.turnManager = turnManager;
     }
  
     public Response serve(IHTTPSession session) {
@@ -27,10 +33,16 @@ public class Server extends NanoHTTPD {
     }
     
     private Response getStaticData(IHTTPSession session) {
+        Turn previous = turnManager.getPrevious();
+        Galaxy galaxy = previous.getGalaxy();
+        
+        
         HashMap<String, Object> response = new HashMap<String, Object>();
-        for (Entry<String, String> entry : session.getParms().entrySet()) {
-            response.put(entry.getKey(), entry.getValue());
+        for (GameObject child : galaxy.getChilds()) {
+            Star s=(Star)child;
+            //todo...
         }
+        
         response.put("error", 0);
         return toJsonResponse(response);
     }

@@ -24,12 +24,5 @@ public class Turn extends GameObject {
         throw new Error("Turn should contain a galaxy!");
     }
     
-    public void serialize(OutputStream out) {
-        
-    }
-    
-    public static Turn deserialize(InputStream in) {
-        return null;
-    }
     
 }
