@@ -6,7 +6,7 @@ public abstract class GameObject {
     
     protected GameObject parent;
 
-    protected List<GameObject> subItems;
+    protected List<GameObject> childs;
     
     protected Player owner;
     
@@ -16,7 +16,7 @@ public abstract class GameObject {
     }
     
     public String getStringAttribute(String key, String def) {
-        for (GameObject i : subItems) {
+        for (GameObject i : childs) {
             if (i instanceof StringAttribute && ((StringAttribute) i).getKey().equals(key))  {
                 return ((StringAttribute) i).getValue();
             }
@@ -25,15 +25,20 @@ public abstract class GameObject {
     }
     
     public Integer getIntAttribute(String key, Integer def) {
-        for (GameObject i : subItems) {
+        for (GameObject i : childs) {
             if (i instanceof IntAttribute && ((IntAttribute) i).getKey().equals(key))  {
                 return ((IntAttribute) i).getValue();
             }
         }
         return def;
     }
+
+    public <T extends GameObject> T createCopy() {
+        throw new Error("Not implemented");
+    }
     
-    protected void attachToParent(GameObject parent) {
+    public void attachToParent(GameObject parent) {
+        if (this.parent!=null) detach(this.parent);
         this.parent=parent;
         parent.attach(this);
     }
@@ -44,11 +49,11 @@ public abstract class GameObject {
     }
 
     private void attach(GameObject gameObject) {
-        subItems.add(gameObject);
+        childs.add(gameObject);
     }
     
     private boolean detach(GameObject gameObject) {
-        return subItems.remove(gameObject);
+        return childs.remove(gameObject);
     }
 
 }

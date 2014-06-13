@@ -2,8 +2,10 @@ package galaxycowboys.gameobject;
 
 public class Galaxy extends GameObject {
 
-    public Galaxy() {
-        super(null, null);
+    public String hash;
+    
+    public Galaxy(Turn turn) {
+        super(null, turn);
     }
     
 }
